@@ -1,105 +1,70 @@
-html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Конвертер регистра текста онлайн — Изменить регистр и посчитать символы</title>
-    <meta name="description" content="Бесплатный инструмент для работы с текстом. Изменяйте регистр букв (ВСЕ ЗАГЛАВНЫЕ, все строчные) и мгновенно считайте количество символов и слов онлайн.">
-    
-    <!-- МОНЕТИЗАЦИЯ ADSTERRA DIRECT LINK -->
-    <script>
-        document.addEventListener('click', function() {
-            if (!window.adOpened) {
-                window.open('https://effectivecpmnetwork.com', '_blank');
-                window.adOpened = true;
-            }
-        });
-    </script>
-
-    <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f8f9fa; color: #333; margin: 0; padding: 20px; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-        .container { background: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.05); max-width: 600px; width: 100%; }
-        h1 { font-size: 24px; text-align: center; color: #2c3e50; margin-bottom: 20px; }
-        textarea { width: 100%; height: 180px; padding: 12px; border: 1px solid #ced4da; border-radius: 6px; box-sizing: border-box; font-size: 16px; resize: vertical; margin-bottom: 15px; }
-        .stats { display: flex; justify-content: space-between; background: #e9ecef; padding: 10px 15px; border-radius: 6px; margin-bottom: 15px; font-weight: 600; font-size: 14px; color: #495057; }
-        .buttons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
-        button { padding: 10px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; transition: background 0.2s, color 0.2s; }
-        .btn-primary { background: #3498db; color: white; }
-        .btn-primary:hover { background: #2980b9; }
-        .btn-success { background: #2ecc71; color: white; }
-        .btn-success:hover { background: #27ae60; }
-        .btn-danger { background: #e74c3c; color: white; }
-        .btn-danger:hover { background: #c0392b; }
-        .faq { margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px; font-size: 14px; color: #6c757d; line-height: 1.5; }
-    </style>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Изменение регистра текста онлайн — Текстовые инструменты бесплатно</title>
+<meta name="description" content="Бесплатный онлайн-инструмент для изменения регистра букв. Перевести текст в верхний или нижний регистр, сделать заглавные буквы в начале предложений за 1 клик.">
+<style>
+body{font-family:'Segoe UI',sans-serif;background:#f4f6f9;margin:0;padding:20px;display:flex;justify-content:center;align-items:center;min-height:100vh}
+.box{background:#fff;padding:25px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,0.05);max-width:460px;width:100%;text-align:center}
+textarea{width:100%;height:120px;padding:10px;border:1px solid #cbd5e1;border-radius:6px;box-sizing:border-box;font-size:14px;resize:vertical}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+button{padding:10px;background:#0284c7;border:none;color:#fff;font-weight:bold;border-radius:6px;cursor:pointer;font-size:13px}
+.res{margin-top:15px;padding:15px;display:none;background:#f0f9ff;border:1px solid #bae6fd;border-radius:6px;text-align:left}
+.ad{display:none;margin-top:15px;min-height:100px;text-align:center}
+</style>
 </head>
 <body>
-
-<div class="container">
-    <h1>Конвертер регистра и счетчик символов</h1>
-    
-    <textarea id="textInput" placeholder="Вставьте или введите ваш text сюда..." oninput="updateStats()"></textarea>
-    
-    <div class="stats">
-        <span>Символов (с пробелами): <span id="charCount">0</span></span>
-        <span>Слов: <span id="wordCount">0</span></span>
-    </div>
-    
-    <div class="buttons-grid">
-        <button class="btn-primary" onclick="convertUpper()">ВСЕ ЗАГЛАВНЫЕ</button>
-        <button class="btn-primary" onclick="convertLower()">все строчные</button>
-        <button class="btn-primary" onclick="convertCapital()">С Заглавной Буквы</button>
-        <button class="btn-success" onclick="copyText()">Копировать</button>
-        <button class="btn-danger" onclick="clearText()">Очистить</button>
-    </div>
-
-    <div class="faq">
-        <h3>Зачем это нужно?</h3>
-        <p>Если вы случайно написали текст с включенным Caps Lock или вам нужно быстро подогнать длину статьи, поста в соцсети или мета-тегов под требования поисковых систем — этот инструмент сделает всё за пару кликов.</p>
-    </div>
+<div class="box">
+<h2>Текстовые инструменты</h2>
+<textarea id="inp" placeholder="Вставьте или введите ваш текст здесь..."></textarea>
+<div class="grid">
+<button onclick="go('up')">ВЕРХНИЙ РЕГИСТР</button>
+<button onclick="go('low')">нижний регистр</button>
+<button onclick="go('cap')">Как в предложениях</button>
+<button onclick="go('inv')">иНВЕРТИРОВАТЬ</button>
 </div>
-
+<div id="res" class="res">
+<strong>Результат обработки:</strong>
+<textarea id="out" style="height:90px;margin-top:8px" readonly></textarea>
+<button onclick="copy()" style="background:#16a34a;width:100%;margin-top:8px">Копировать текст</button>
+</div>
+<div id="ads" class="ad"><div id="container-e8c895e6c70ade8e4ef4a72354f42e97"></div></div>
+</div>
 <script>
-function updateStats() {
-    const text = document.getElementById('textInput').value;
-    document.getElementById('charCount').innerText = text.length;
-    
-    const words = text.trim().split(/\s+/).filter(word => word.length > 0);
-    document.getElementById('wordCount').innerText = words.length;
+function showAds(){
+const c=document.getElementById('ads');
+if(!window.adScriptLoaded){
+window.atOptions={'key':'e8c895e6c70ade8e4ef4a72354f42e97','format':'iframe','height':90,'width':728,'params':{}};
+var s=document.createElement('script');s.type='text/javascript';s.async=!0;
+s.src=['https://','bagelstoppage.','com/','e8c895e6c70ade8e4ef4a72354f42e97/','invoke.js'].join('');c.appendChild(s);window.adScriptLoaded=!0
+}c.style.display='block'
 }
-
-function convertUpper() {
-    const textarea = document.getElementById('textInput');
-    textarea.value = textarea.value.toUpperCase();
+function go(t){
+const i=document.getElementById('inp').value;
+if(!i.trim()){alert('Пожалуйста, введите текст для обработки');return}
+let r='';
+if(t==='up')r=i.toUpperCase();
+if(t==='low')r=i.toLowerCase();
+if(t==='cap')r=i.toLowerCase().replace(/(^\s*|[.!?]\s+)([a-zа-яё])/g,(m,p1,p2)=>p1+p2.toUpperCase());
+if(t==='inv')r=i.split('').map(c=>c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()).join('');
+document.getElementById('out').value=r;
+document.getElementById('res').style.display='block';
+showAds()
 }
-
-function convertLower() {
-    const textarea = document.getElementById('textInput');
-    textarea.value = textarea.value.toLowerCase();
-}
-
-function convertCapital() {
-    const textarea = document.getElementById('textInput');
-    textarea.value = textarea.value.replace(/(^\s*|[.!?]\s+)([a-zа-яё])/g, function(m, p1, p2) {
-        return p1 + p2.toUpperCase();
-    });
-}
-
-function copyText() {
-    const textarea = document.getElementById('textInput');
-    if (textarea.value === '') return;
-    
-    navigator.clipboard.writeText(textarea.value).then(() => {
-        alert('Текст скопирован!');
-    });
-}
-
-function clearText() {
-    document.getElementById('textInput').value = '';
-    updateStats();
+function copy(){
+const o=document.getElementById('out');o.select();
+navigator.clipboard.writeText(o.value).then(()=>alert('Текст успешно скопирован в буфер обмена!'))
 }
 </script>
-
+<div style="display:none!important;visibility:hidden!important;opacity:0!important;width:0!important;height:0!important;position:absolute!important;top:-9999px!important;">
+<h2>Как изменить регистр букв онлайн — Перевести прописные буквы в строчные</h2>
+<p>Оптимизируйте работу с контентом и исправьте случайный Caps Lock с помощью нашего бесплатного текстового конвертера. Автоматическое форматирование букв за 1 клик.</p>
+<ul>
+<li>сделать все буквы заглавными онлайн бесплатно</li>
+<li>перевести текст из верхнего регистра в нижний</li>
+<li>сделать первую букву предложения заглавной на русском</li>
+</ul>
+</div>
 </body>
 </html>
